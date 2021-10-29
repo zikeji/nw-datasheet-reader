@@ -59,6 +59,14 @@ async function extractRelevantRecords(filePath) {
                         compressedSize: entry.compressedSize,
                         uncompressedSize: entry.uncompressedSize
                     });
+                } else if (/^localization/gm.test(entry.fileName)) {
+                    entries.push({
+                        pakFile: filePath,
+                        offset: entry.relativeOffsetOfLocalHeader,
+                        fileName: entry.fileName,
+                        compressedSize: entry.compressedSize,
+                        uncompressedSize: entry.uncompressedSize
+                    });
                 }
                 zipFile.readEntry();
             });
